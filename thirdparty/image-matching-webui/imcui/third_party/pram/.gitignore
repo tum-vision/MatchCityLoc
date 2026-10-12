@@ -1,0 +1,13 @@
+.idea
+__pycache__
+weights/12scenes*
+weights/7scenes*
+weights/aachen*
+weights/cambridgelandmarks*
+weights/imp_adagml.80.pth
+landmarks
+3D-models
+log_*
+*.log
+.nfs*
+Pangolin

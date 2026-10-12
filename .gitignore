@@ -1,0 +1,78 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.Python
+
+# Secrets / local env
+.env
+.env.*
+*.pem
+*.key
+credentials.json
+secrets.json
+
+# IDE / agent
+.vscode/
+.idea/
+.claude/
+.cursor/
+*.swp
+
+# OS
+.DS_Store
+Thumbs.db
+.nfs*
+
+# Data / checkpoints / outputs (link locally; never commit)
+/data
+data/
+/downloads
+downloads/
+/checkpoints
+checkpoints/
+outputs/
+results/
+tmp/
+tmp_*/
+wandb/
+runs/
+*.log
+logs/
+slurm/logs/
+*.out
+*.err
+
+# Matcher / foundation weights downloaded on first run
+*.ckpt
+*.pth
+*.pt
+*.safetensors
+*.onnx
+*.pkl
+*.pickle
+*.npz
+
+# Local-only (tests + paper TeX / figure automation)
+test/
+paper_scripts/
+paper/
+project-page/
+poster/
+video/
+*.pdf
+*.tex
+*.pptx
+.codex/
+.deps/
+.models/
+
+# Scratch
+scratch_*.py
+scratch*.py
+log.txt

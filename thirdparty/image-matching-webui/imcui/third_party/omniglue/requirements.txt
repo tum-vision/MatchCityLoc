@@ -1,0 +1,8 @@
+matplotlib
+numpy
+opencv-python
+Pillow
+torch
+gdown
+tf2onnx
+onnxruntime
