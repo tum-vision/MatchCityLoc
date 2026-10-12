@@ -1,0 +1,13 @@
+.DS_Store
+__pycache__/
+*.pyc
+.env
+.env.*
+*.pem
+*.key
+paper/
+*.pdf
+*.tex
+*.pptx
+node_modules/
+test-results/

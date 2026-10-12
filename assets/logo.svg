@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 192 142" fill="none">
+  <title>Drone camera normals matched to rendered city-model normals</title>
+  <!-- Quadcopter, gimbal camera, and camera field of view. -->
+  <g stroke="#292830" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m78 22 15 9 15-9M78 44l15-9 15 9"/>
+    <ellipse cx="74" cy="19" rx="15" ry="5"/><ellipse cx="112" cy="19" rx="15" ry="5"/>
+    <ellipse cx="74" cy="47" rx="15" ry="5"/><ellipse cx="112" cy="47" rx="15" ry="5"/>
+    <rect x="86" y="26" width="15" height="16" rx="5" fill="white"/>
+    <path d="M93 43v7"/><rect x="86" y="51" width="15" height="10" rx="3" fill="white"/>
+    <circle cx="94" cy="56" r="2" fill="#292830" stroke="none"/>
+  </g>
+  <path d="M88 64 37 84m58-20-21 20" stroke="#96869a" stroke-width="1.5" stroke-dasharray="3 4"/>
+  <!-- Both domains use the SAME orientation colors; left is a camera image,
+       right a clean LoD render. Dots indicate normal-map correspondences. -->
+  <rect x="5" y="85" width="75" height="51" rx="4" fill="#ede9f3" stroke="#b9afc5"/>
+  <path d="m10 109 27-17 30 14-27 17Z" fill="#7ee1c1"/>
+  <path d="m10 109 30 14v11H10Z" fill="#858cf0"/>
+  <path d="m40 123 27-17v28H40Z" fill="#c479dc"/>
+  <path d="m16 107 6-4m31 14 6-4M26 129h7" stroke="#eeebff" stroke-width="3"/>
+  <rect x="112" y="85" width="75" height="51" rx="4" fill="#ede9f3" stroke="#b9afc5"/>
+  <path d="m120 107 26-15 29 15-27 16Z" fill="#7ee1c1"/>
+  <path d="m120 107 28 16v11h-28Z" fill="#858cf0"/>
+  <path d="m148 123 27-16v27h-27Z" fill="#c479dc"/>
+  <g stroke="#714675" stroke-width="1.6" stroke-dasharray="3 3">
+    <path d="M38 104h108M54 125h108"/>
+  </g>
+  <g fill="white" stroke="#714675" stroke-width="2">
+    <circle cx="38" cy="104" r="3"/><circle cx="146" cy="104" r="3"/>
+    <circle cx="54" cy="125" r="3"/><circle cx="162" cy="125" r="3"/>
+  </g>
+</svg>

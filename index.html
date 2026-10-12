@@ -1,0 +1,278 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="MatchCityLoc: Aerial Localization in LoD City Models via Surface Normal Matching. WACV 2027.">
+  <meta name="theme-color" content="#ffffff">
+  <title>MatchCityLoc | WACV 2027</title>
+  <link rel="canonical" href="https://tum-vision.github.io/MatchCityLoc/">
+  <script src="theme.js?v=4"></script>
+  <link rel="icon" type="image/png" href="assets/logo-3d.png">
+  <link rel="stylesheet" href="style.css?v=15">
+  <script defer src="citation.js?v=1"></script>
+  <script defer src="app.js?v=2"></script>
+  <script defer src="assets/experiments/benchmarks.js?v=oracle-completion-2"></script>
+  <script defer src="assets/experiments/qualitative-data.js?v=camera-ready-1"></script>
+  <script defer src="comparisons.js?v=4"></script>
+  <script defer src="logo.js?v=5"></script>
+  <script defer src="method.js?v=4"></script>
+  <script defer src="teaser.js?v=3"></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header">
+    <a class="wordmark" href="#main">MatchCityLoc</a>
+    <nav aria-label="Page sections">
+      <a href="#abstract">Abstract</a><a href="#method">Method</a><a href="#qualitative">Qualitative</a><a href="#results">Results</a>
+    </nav>
+    <button class="theme-toggle" id="theme-toggle" type="button" aria-label="Dark mode" aria-pressed="false" title="Switch to dark mode" hidden>
+      <svg class="theme-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.3 15.5A8.7 8.7 0 0 1 8.5 3.7a8.7 8.7 0 1 0 11.8 11.8Z"/></svg>
+      <svg class="theme-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M2 12h2m16 0h2M5 5l1.5 1.5m11 11L19 19M5 19l1.5-1.5m11-11L19 5"/></svg>
+    </button>
+  </header>
+  <main id="main">
+    <div class="hero-shell">
+      <div class="hero-backdrop" aria-hidden="true"><div class="hero-normal hero-normal-query"></div><div class="hero-normal hero-normal-render"></div></div>
+    <section class="paper-header container" aria-labelledby="paper-title">
+      <p class="venue">WACV 2027</p>
+      <div class="paper-logo" id="animated-logo">
+        <svg viewBox="-20 -20 1576 1064" role="img" aria-labelledby="logo-title">
+          <title id="logo-title">A hovering drone views a building through its camera frustum; corresponding points connect the image to the LoD model</title>
+          <defs>
+            <clipPath id="logo-drone-clip"><rect width="850" height="350"/></clipPath>
+            <clipPath id="logo-buildings-clip"><rect y="360" width="1536" height="664"/><rect x="900" width="636" height="360"/></clipPath>
+          </defs>
+          <g id="logo-frustum" class="logo-frustum"><path d="M455 273 440 536M455 273 774 428M455 273 819 806M455 273 522 964"/></g>
+          <image href="assets/logo-animation-base.png" width="1536" height="1024" clip-path="url(#logo-buildings-clip)"/>
+          <g id="logo-drone"><image href="assets/logo-animation-base.png" width="1536" height="1024" clip-path="url(#logo-drone-clip)"/></g>
+          <g class="logo-correspondences" aria-hidden="true">
+            <g class="logo-match" style="--delay: -0.4s"><path d="M653 475 1205 271"/><circle cx="653" cy="475" r="8"/><circle cx="1205" cy="271" r="8"/></g>
+            <g class="logo-match" style="--delay: -1.2s"><path d="M635 600 1191 436"/><circle cx="635" cy="600" r="8"/><circle cx="1191" cy="436" r="8"/></g>
+            <g class="logo-match" style="--delay: -2s"><path d="M620 722 1156 574"/><circle cx="620" cy="722" r="8"/><circle cx="1156" cy="574" r="8"/></g>
+            <g class="logo-match" style="--delay: -2.8s"><path d="M688 782 1093 680"/><circle cx="688" cy="782" r="8"/><circle cx="1093" cy="680" r="8"/></g>
+            <g class="logo-match" style="--delay: -3.6s"><path d="M661 881 1265 852"/><circle cx="661" cy="881" r="8"/><circle cx="1265" cy="852" r="8"/></g>
+            <g class="logo-match" style="--delay: -4.4s"><path d="M730 499 1300 291"/><circle cx="730" cy="499" r="8"/><circle cx="1300" cy="291" r="8"/></g>
+            <g class="logo-match" style="--delay: -5.2s"><path d="M570 615 1098 416"/><circle cx="570" cy="615" r="8"/><circle cx="1098" cy="416" r="8"/></g>
+            <g class="logo-match" style="--delay: -6s"><path d="M751 622 1411 458"/><circle cx="751" cy="622" r="8"/><circle cx="1411" cy="458" r="8"/></g>
+          </g>
+        </svg>
+      </div>
+      <h1 id="paper-title"><span class="paper-name">MatchCityLoc</span><span class="paper-subtitle">Aerial Localization in LoD City Models<br class="desktop-break"> via Surface Normal Matching</span></h1>
+      <div class="authors">
+        <span><a href="https://ussaema.github.io">Oussema Dhaouadi</a><sup aria-label="Affiliations 1, 2, 3, 4">1,2,3,4</sup></span>
+        <span><a href="https://zuriabauer.com/">Zuria Bauer</a><sup aria-label="Affiliation 3">3</sup></span>
+        <span><a href="https://www.linkedin.com/in/johannes-meier-52a159b4/">Johannes Meier</a><sup aria-label="Affiliations 2, 4">2,4</sup></span>
+        <span><a href="https://cvg.ethz.ch/team/Prof-Dr-Marc-Pollefeys">Marc Pollefeys</a><sup aria-label="Affiliations 3, 5">3,5</sup></span>
+        <span><a href="https://cvg.cit.tum.de/members/cremers">Daniel Cremers</a><sup aria-label="Affiliations 2, 4">2,4</sup></span>
+        <span><a href="https://olafwysocki.github.io/">Olaf Wysocki</a><sup aria-label="Affiliation 1">1</sup></span>
+      </div>
+      <div class="institutions" role="group" aria-label="Author affiliations">
+        <a class="institution institution-cambridge" href="https://cv4dt.github.io/" title="University of Cambridge">
+          <sup>1</sup>
+          <span class="institution-art"><img class="institution-white" src="assets/institutions/cambridge.png" alt="University of Cambridge" width="151" height="32"><img class="institution-color-mark" src="assets/institutions/cambridge.png" alt="" aria-hidden="true" width="151" height="32"></span>
+        </a>
+        <a class="institution institution-tum" href="https://cvg.cit.tum.de/" title="Technical University of Munich">
+          <sup>2</sup>
+          <span class="institution-art"><img src="assets/institutions/tum.svg" alt="TUM" width="66" height="32"></span>
+        </a>
+        <a class="institution institution-eth" href="https://cvg.ethz.ch/" title="ETH Zürich">
+          <sup>3</sup>
+          <span class="institution-art"><img class="institution-white" src="assets/institutions/eth-white.svg" alt="ETH Zürich" width="118" height="32"></span>
+        </a>
+        <a class="institution institution-mcml" href="https://mcml.ai/" title="Munich Center for Machine Learning">
+          <sup>4</sup>
+          <span class="institution-art"><img class="institution-white" src="assets/institutions/mcml-white.png" alt="MCML" width="148" height="22"></span>
+        </a>
+        <a class="institution institution-microsoft" href="https://www.microsoft.com/en-us/research/lab/spatial-ai-zurich/" title="Microsoft Spatial AI Lab Zürich">
+          <sup>5</sup>
+          <span class="institution-art"><img class="institution-white" src="assets/institutions/microsoft-white.png" alt="Microsoft" width="140" height="30"><img class="institution-color-mark" src="assets/institutions/microsoft-white.png" alt="" aria-hidden="true" width="140" height="30"></span>
+        </a>
+      </div>
+      <div class="resource-links">
+        <span class="unavailable" title="Paper coming soon"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H5v18h14V8l-5-5ZM14 3v5h5M8 12h8M8 16h8"/></svg> Paper <small>coming soon</small></span>
+        <a class="resource-primary" href="https://github.com/tum-vision/MatchCityLoc"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="m8 7-5 5 5 5m8-10 5 5-5 5M14 4l-4 16"/></svg> Code</a>
+        <a href="https://youtu.be/TWEFaWydEU8"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="4"/><path d="m10 9 5 3-5 3Z"/></svg> Video</a>
+        <a href="assets/MatchCityLoc_WACV2027_Poster.pdf" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="4" width="18" height="13" rx="1"/><path d="M12 17v4m-4 0h8M7 8h10M7 12h6"/></svg> Poster</a>
+        <a href="https://github.com/tum-vision/MatchCityLoc/blob/main/datasets/README.md"><svg viewBox="0 0 24 24" aria-hidden="true"><ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 4 16 4 16 0V5M4 12c0 4 16 4 16 0"/></svg> Datasets</a>
+      </div>
+    </section>
+    </div>
+
+    <figure class="teaser container" id="teaser">
+      <img id="teaser-fallback" src="assets/experiments/teaser-paper.png?v=camera-ready-1" width="1590" height="810" alt="Paper teaser: prior methods score predicted and rendered building silhouettes; MatchCityLoc matches predicted and rendered surface normals, then refines the pose with PnP.">
+      <div id="teaser-interactive" hidden>
+        <div class="teaser-toolbar">
+          <div class="teaser-steps" role="group" aria-label="Explore the paper teaser"><button type="button" data-teaser-step="0" aria-pressed="true">1 · Inputs</button><button type="button" data-teaser-step="1" aria-pressed="false">2 · Representation</button><button type="button" data-teaser-step="2" aria-pressed="false">3 · Pose</button></div>
+          <button type="button" id="teaser-play" aria-pressed="false">▶ Play</button>
+        </div>
+        <div class="teaser-diagrams" id="teaser-diagrams"></div>
+        <div class="teaser-bottom"><span id="teaser-stage-label">01 · Inputs</span><p id="teaser-explanation">Both approaches start with a UAV image and a textureless LoD city model.</p></div>
+      </div>
+      <figcaption><strong>From silhouette scoring to explicit 3D pose solving.</strong> Prior approaches score many rendered masks. MatchCityLoc matches surface normals and refines the pose with PnP. <a href="assets/experiments/teaser-paper.png" target="_blank" rel="noopener">Paper figure ↗</a></figcaption>
+    </figure>
+
+    <section class="section abstract narrow" id="abstract">
+      <h2>Abstract</h2>
+      <p>Autonomous Unmanned Aerial Vehicle (UAV) navigation in urban environments requires precise pose estimation. Because Global Navigation Satellite System (GNSS) signals are often unreliable in cities, visual localization serves as a crucial complement. Within this domain, textureless Level-of-Detail (LoD) city models provide a lightweight and privacy-preserving substitute for heavy 3D textured meshes. However, localizing against abstract geometry is challenging. Existing pipelines typically score 2D silhouette overlaps, which can suffer from severe geometric ambiguities.</p>
+      <p>We present MatchCityLoc, a framework that shifts this paradigm to direct feature matching from a noisy 6-DoF pose prior. By extracting surface normals from the query image using a zero-shot foundation model and matching them against rendered LoD normals, we establish explicit 3D-to-2D correspondences. This enables a Perspective-n-Point (PnP) pose solve, which we iteratively refine through a render-and-match loop. Experiments demonstrate strong recall and translation accuracy among the evaluated off-the-shelf LoD-based methods with very few renderings.</p>
+    </section>
+
+    <section class="section container" id="method">
+      <h2>Method</h2>
+      <p class="section-intro">Surface normals provide a common representation for the camera image and the city model. Refinement starts from a noisy position-and-orientation prior with known camera intrinsics.</p>
+      <div class="method-explorer" id="method-explorer">
+        <div class="method-toolbar"><span>Click a block to explore the pipeline</span><button id="method-play" type="button" aria-pressed="false" hidden>▶ Play pipeline</button></div>
+        <svg class="method-query-route" viewBox="0 0 1120 52" role="img" aria-label="Fixed query normals go directly from prediction to matching">
+          <path d="M130 50V16H706V50m-5-6 5 6 5-6"/>
+          <path class="method-packet" d="M130 50V16H706V50" aria-hidden="true"/>
+          <rect x="312" y="4" width="215" height="24"/><text x="420" y="20" text-anchor="middle">Fixed query normals → matching</text>
+        </svg>
+        <ol class="method-blocks" aria-label="Method stages">
+          <li><button class="method-block" type="button" data-method-step="0" aria-pressed="true" aria-controls="method-detail">
+            <span class="method-stage-label">01 · Once per image</span><strong>Predict normals</strong>
+            <span class="method-visual"><img src="assets/experiments/query.png" width="1080" height="720" alt="UAV query image" loading="lazy"><img class="method-reveal" src="assets/experiments/predicted.png" width="1080" height="720" alt="Predicted query normals" loading="lazy"></span>
+            <span class="method-operation">MoGe-2</span><span class="method-output">Image → query normals</span>
+          </button></li>
+          <li><button class="method-block" type="button" data-method-step="1" aria-pressed="false" aria-controls="method-detail">
+            <span class="method-stage-label">02 · Current pose</span><strong>Render the LoD</strong>
+            <span class="method-visual"><img src="assets/experiments/iteration-0-normals.png" width="415" height="300" alt="LoD normals rendered at the initial pose" loading="lazy"><span class="method-scan" aria-hidden="true"></span></span>
+            <span class="method-operation">Normal + depth renderer</span><span class="method-output">City model → rendered geometry</span>
+          </button></li>
+          <li><button class="method-block" type="button" data-method-step="2" aria-pressed="false" aria-controls="method-detail">
+            <span class="method-stage-label">03 · Normal space</span><strong>Match features</strong>
+            <span class="method-visual method-match-preview"><img src="assets/experiments/matches.png" alt="Recorded correspondences between predicted and rendered normals" loading="lazy"></span>
+            <span class="method-operation">MINIMA (RoMa)</span><span class="method-output">Two normal maps → 2D matches</span>
+          </button></li>
+          <li><button class="method-block" type="button" data-method-step="3" aria-pressed="false" aria-controls="method-detail">
+            <span class="method-stage-label">04 · 3D grounding</span><strong>Refine the pose</strong>
+            <span class="method-visual"><img src="assets/experiments/iteration-0-overlay.png" width="415" height="300" alt="Initial model reprojection" loading="lazy"><img class="method-reveal" src="assets/experiments/iteration-3-overlay.png" width="415" height="300" alt="Final recorded model reprojection" loading="lazy"></span>
+            <span class="method-operation">Lift to 3D · PnP-RANSAC</span><span class="method-output">2D–3D matches → updated pose</span>
+          </button></li>
+        </ol>
+        <div class="method-loop"><span class="method-fixed">Query normals stay fixed</span><span class="method-return">↶ Re-render at the updated pose · repeat steps 2–4</span></div>
+        <div class="method-detail" id="method-detail">
+          <div><span class="method-stage-label" id="method-detail-step">01 / 04</span><h3 id="method-detail-title">A shared representation</h3><p id="method-detail-text">MoGe-2 predicts surface normals from the UAV image. This prediction is computed once and reused throughout refinement: matching uses surface orientation rather than RGB texture.</p></div>
+          <dl><div><dt>Input</dt><dd id="method-input">UAV image</dd></div><div><dt>Output</dt><dd id="method-output">Fixed query normal map</dd></div></dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-band" id="qualitative">
+      <div class="container section">
+        <h2>Iterative pose refinement</h2>
+        <p class="section-intro">Step through the recorded experiment used in the paper’s refinement figure.</p>
+        <div class="playback-controls">
+          <button type="button" id="play-iterations" aria-label="Play recorded refinement in a loop" aria-pressed="false" disabled><span aria-hidden="true">▶</span> Play loop</button>
+          <label><input type="checkbox" id="show-iteration-matches" checked disabled> Show matches</label>
+          <span class="playback-hint">1.8 s per step · repeats</span>
+        </div>
+        <div class="iteration-controls" role="group" aria-label="Recorded refinement iteration">
+          <button type="button" data-iteration="0" aria-pressed="true">Initial pose</button>
+          <button type="button" data-iteration="1" aria-pressed="false">Iteration 1</button>
+          <button type="button" data-iteration="2" aria-pressed="false">Iteration 2</button>
+          <button type="button" data-iteration="3" aria-pressed="false">Iteration 3</button>
+        </div>
+        <figure class="iteration-figure">
+          <div class="image-triptych" id="iteration-panels">
+            <div><img id="iteration-predicted" src="assets/experiments/iteration-predicted.png" width="415" height="300" alt="Fixed query surface-normal prediction" loading="lazy"><p>Predicted normals <span>Fixed query</span></p></div>
+            <div><div class="iteration-frame"><img id="iteration-normals" src="assets/experiments/iteration-0-normals.png" width="415" height="300" alt="LoD normals rendered at the initial pose" loading="lazy"></div><p>Rendered normals <span id="render-state">Initial pose</span></p></div>
+            <div><div class="iteration-frame"><img id="iteration-overlay" src="assets/experiments/iteration-0-overlay.png" width="415" height="300" alt="LoD edges overlaid on the UAV photograph at the initial pose" loading="lazy"></div><p>Reprojection onto the image <span>Red: projected LoD edges</span></p></div>
+            <svg id="iteration-matches" aria-hidden="true"></svg>
+          </div>
+          <p class="match-caption" id="match-caption">Enable JavaScript to view the recorded matches.</p>
+          <div class="pose-errors" aria-live="polite"><span id="pose-state">Initial pose</span><span>Translation error <strong id="translation-error">19.8 m</strong></span><span>Rotation error <strong id="rotation-error">1.9°</strong></span></div>
+        </figure>
+        <noscript><p>Enable JavaScript to switch iterations. The initial pose remains visible without it.</p></noscript>
+      </div>
+    </section>
+
+    <section class="section container" id="comparison">
+      <h2>Qualitative results</h2>
+      <p class="section-intro">Pose estimates reprojected into real UAV images across all three benchmarks.</p>
+      <div class="comparison-grid" id="comparison-grid">
+      <div class="comparison-explorer" id="comparison-explorer" hidden>
+        <div class="comparison-selectors">
+          <label>Example<select id="comparison-scene"><option value="uav-in">UAVD4L · in-Traj · LoD3</option><option value="uav-out">UAVD4L · out-of-Traj · LoD3</option><option value="swiss-in">Swiss-EPFL · in-Place · LoD2</option><option value="swiss-out">Swiss-EPFL · out-of-Place · LoD2</option><option value="semcity">SemCityLockeD · LoD3</option></select></label>
+          <label>Left method<select id="comparison-left"></select></label>
+          <label>Right method<select id="comparison-right"></select></label>
+        </div>
+        <div class="comparison-stage" id="comparison-stage" aria-busy="true">
+          <img id="comparison-right-image" width="598" height="450" alt="Right-hand method result">
+          <img id="comparison-left-image" width="598" height="450" alt="Left-hand method result">
+          <div class="comparison-divider" id="comparison-position" role="slider" tabindex="0" aria-label="Comparison divider: percentage of left method visible" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50" aria-orientation="horizontal"><span aria-hidden="true"><svg viewBox="0 0 24 24"><path d="m9 7-5 5 5 5m6-10 5 5-5 5M4 12h16"/></svg></span></div>
+          <div class="comparison-image-labels" aria-hidden="true"><span id="comparison-left-label"></span><span id="comparison-right-label"></span></div>
+        </div>
+        <div class="comparison-errors" id="comparison-errors"></div>
+        <p id="comparison-status" class="table-note" role="status">Loading comparison…</p>
+        <p class="table-note" id="comparison-example-note">Representative benchmark example from the main paper. All six methods/reference poses are available.</p>
+      </div>
+      </div>
+      <p class="table-note">Original paper panels, including measured errors. LoD-Loc v2 and SemCityLoc use off-the-shelf masks; LoD-Loc v3 uses oracle masks. Red lines are projected LoD edges, not matches.</p>
+      <noscript><p>Enable JavaScript to explore the qualitative comparisons.</p></noscript>
+    </section>
+
+    <section class="section container" id="results">
+      <h2>Quantitative results</h2>
+      <p class="section-intro">Compare methods by dataset and model detail. Click a heading to sort, reverse, then restore paper order.</p>
+      <div id="benchmark-explorer" hidden>
+        <div class="benchmark-controls">
+          <label>Dataset<select id="benchmark-dataset"></select></label>
+          <label>Split<select id="benchmark-split"></select></label>
+          <label>City model<select id="benchmark-lod"></select></label>
+          <label>Methods<select id="benchmark-group"><option value="all">All setups</option><option value="off">Off-the-shelf</option><option value="trained">Requires training</option><option value="oracle">Oracle (GT masks)</option><option value="prior">Sensor prior</option></select></label>
+          <button type="button" id="reset-table-order">Paper order</button>
+        </div>
+        <div class="table-scroll" tabindex="0" role="region" aria-label="Sortable baseline comparison; scroll horizontally on small screens">
+          <table id="benchmark-table">
+            <caption id="benchmark-caption"></caption>
+            <thead><tr>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="method">Method <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="vision">Vision model <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="setup">Setup <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="translation">T.e. (m) ↓ <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="rotation">R.e. (°) ↓ <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="r2">R @ 2 m / 2° ↑ <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="r3">R @ 3 m / 3° ↑ <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="r5">R @ 5 m / 5° ↑ <span aria-hidden="true">↕</span></button></th>
+            </tr></thead>
+            <tbody id="benchmark-body"></tbody>
+          </table>
+        </div>
+        <p class="table-note" id="benchmark-summary" role="status"></p>
+        <p class="table-note"><strong>Bold</strong>: best · <span style="text-decoration: underline; text-underline-offset: 3px">Underlined</span>: second-best within each paper comparison group. Emphasis follows the paper, including its protocol and coverage exclusions.</p>
+        <p class="table-note">Hover, focus, or tap a setup tag or method name for details.</p>
+      </div>
+      <div class="table-scroll" id="benchmark-fallback" tabindex="0" role="region" aria-label="Benchmark results; scroll horizontally on small screens">
+        <table>
+          <caption>Median pose error and recall from Tables 1–2.</caption>
+          <thead><tr><th scope="col">Dataset</th><th scope="col">Split / model</th><th scope="col">Translation ↓</th><th scope="col">Rotation ↓</th><th scope="col">R @ 2 m / 2° ↑</th><th scope="col">R @ 5 m / 5° ↑</th></tr></thead>
+          <tbody>
+            <tr><th scope="row">UAVD4L-LoDv2</th><td>in-Traj · LoD3</td><td>0.62 m</td><td>0.34°</td><td>92.64%</td><td>98.44%</td></tr>
+            <tr><th scope="row">UAVD4L-LoDv2</th><td>out-of-Traj · LoD3</td><td>0.66 m</td><td>0.28°</td><td>94.66%</td><td>99.22%</td></tr>
+            <tr class="group-start"><th scope="row">Swiss-EPFLv2</th><td>in-Place · LoD2</td><td>1.43 m</td><td>1.02°</td><td>66.5%</td><td>94.2%</td></tr>
+            <tr><th scope="row">Swiss-EPFLv2</th><td>out-of-Place · LoD2</td><td>1.30 m</td><td>0.95°</td><td>69.3%</td><td>96.1%</td></tr>
+            <tr class="group-start"><th scope="row">SemCityLockeD</th><td>LoD2</td><td>1.45 m</td><td>1.14°</td><td>59.12%</td><td>77.16%</td></tr>
+            <tr><th scope="row">SemCityLockeD</th><td>LoD3</td><td>0.87 m</td><td>0.81°</td><td>70.33%</td><td>86.34%</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="table-note">Joint recall requires both translation and rotation errors to fall within the stated thresholds. SemCityLockeD results use the original rectified evaluation images.</p>
+    </section>
+
+    <section class="section narrow" id="citation" aria-labelledby="citation-title">
+      <div class="citation-heading">
+        <h2 id="citation-title">Citation</h2>
+        <button id="copy-citation" type="button" aria-label="Copy BibTeX citation" hidden><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="8" y="8" width="12" height="13" rx="2"/><path d="M16 8V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h3"/></svg><span>Copy</span></button>
+      </div>
+      <pre class="citation-code" tabindex="0" aria-label="BibTeX citation"><code id="citation-bibtex">@inproceedings{dhaouadi2027matchcityloc,
+  title     = {{MatchCityLoc}: Aerial Localization in {LoD} City Models via Surface Normal Matching},
+  author    = {Dhaouadi, Oussema and Bauer, Zuria and Meier, Johannes and Pollefeys, Marc and Cremers, Daniel and Wysocki, Olaf},
+  booktitle = {IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
+  year      = {2027}
+}</code></pre>
+      <p id="citation-status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+</body>
+</html>
