@@ -133,28 +133,7 @@ PYTHONPATH=. python -u pipeline_matching.py \
 
 Use `python pipeline_matching.py --help` for dataset, matcher, modality, and ablation options. Example cluster launchers are provided in [slurm/](slurm/README.md). Set the partition and resource limits for your cluster, and choose the iteration count for the evaluation protocol you intend to run.
 
-### Evaluate an exact query subset
-
-To evaluate saved final poses on a query list, supply a JSON manifest containing image filenames under the selected split and group, for example `{"val": {"inTraj": ["image.JPG"]}}`:
-
-```bash
-python scripts/evaluate_subset.py \
-    --metrics outputs/eval_semcity_lod3/metrics.json \
-    --manifest datasets/SemCityLockeD/splits/author_provided_188.json \
-    --split val --group inTraj \
-    --expected-count 188 --output outputs/semcity_subset.json
-```
-
-The evaluator requires every requested query, rejects duplicate IDs and invalid errors, and includes fallback poses. It reports joint recall and mean/median translation and full-rotation errors. The paper's main SemCityLockeD comparison uses 937 rectified queries. Published SemCityLoc results follow their original evaluation protocol and report mean translation and yaw errors.
-
-The bottom block of Table 2 also reports our results on the exact 188-query list supplied by a SemCityLoc author, using the same rectified images, priors, and five-update budget as our full evaluation:
-
-| City model | R @ 2 m / 2° ↑ | R @ 3 m / 3° ↑ | R @ 5 m / 5° ↑ | Median translation ↓ | Median rotation ↓ |
-|---|---:|---:|---:|---:|---:|
-| LoD2 | 57.45% | 63.30% | 72.34% | 1.46 m | 1.16° |
-| LoD3 | 67.55% | 76.60% | 84.57% | 1.00 m | 0.88° |
-
-The manifest retains its original `val/inTraj` labels. These are full-rotation metrics, not yaw-only metrics.
+The paper's SemCityLockeD comparison uses 937 rectified queries. Published SemCityLoc results follow their original evaluation protocol and report mean translation and yaw errors, unlike our median translation and full-rotation errors.
 
 ## 📁 Repository contents
 
