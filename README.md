@@ -33,6 +33,8 @@
 
 MatchCityLoc refines a noisy camera-pose prior against a textureless **LoD city model** by matching **surface normals**. It uses pretrained models without dataset-specific training.
 
+Experiments demonstrate strong pose recall and accurate translation and rotation among the evaluated off-the-shelf LoD-based methods. These findings support accurate urban UAV localization using lightweight city geometry, without textured maps or dataset-specific training.
+
 ## 🚀 How it works
 
 1. **Predict normals** from a calibrated UAV image with MoGe-2.
@@ -131,6 +133,29 @@ PYTHONPATH=. python -u pipeline_matching.py \
 
 Use `python pipeline_matching.py --help` for dataset, matcher, modality, and ablation options. Example cluster launchers are provided in [slurm/](slurm/README.md). Set the partition and resource limits for your cluster, and choose the iteration count for the evaluation protocol you intend to run.
 
+### Evaluate an exact query subset
+
+To evaluate saved final poses on a query list, supply a JSON manifest containing image filenames under the selected split and group, for example `{"val": {"inTraj": ["image.JPG"]}}`:
+
+```bash
+python scripts/evaluate_subset.py \
+    --metrics outputs/eval_semcity_lod3/metrics.json \
+    --manifest datasets/SemCityLockeD/splits/author_provided_188.json \
+    --split val --group inTraj \
+    --expected-count 188 --output outputs/semcity_subset.json
+```
+
+The evaluator requires every requested query, rejects duplicate IDs and invalid errors, and includes fallback poses. It reports joint recall and mean/median translation and full-rotation errors. The paper's main SemCityLockeD comparison uses 937 rectified queries. Published SemCityLoc results follow their original evaluation protocol and report mean translation and yaw errors.
+
+The supplement also evaluates the exact 188-query list supplied by a SemCityLoc author, using the same rectified images, priors, and five-update budget as our full evaluation:
+
+| City model | R @ 2 m / 2° ↑ | R @ 3 m / 3° ↑ | R @ 5 m / 5° ↑ | Median translation ↓ | Median rotation ↓ |
+|---|---:|---:|---:|---:|---:|
+| LoD2 | 57.45% | 63.30% | 72.34% | 1.46 m | 1.16° |
+| LoD3 | 67.55% | 76.60% | 84.57% | 1.00 m | 0.88° |
+
+The manifest retains its original `val/inTraj` labels. These are full-rotation metrics, not yaw-only metrics.
+
 ## 📁 Repository contents
 
 `main` contains the localization and ablation pipelines, configurations, dataset adapters and preparation scripts, evaluation utilities, and vendored matching code. Model weights and dataset images are downloaded separately. The small SemCityLockeD pose and calibration annotations are included with source attribution.
@@ -146,7 +171,7 @@ This implementation builds on [MoGe-2](https://github.com/microsoft/MoGe), [MINI
 ```bibtex
 @inproceedings{dhaouadi2027matchcityloc,
   title     = {{MatchCityLoc}: Aerial Localization in {LoD} City Models via Surface Normal Matching},
-  author    = {Dhaouadi, Oussema and Bauer, Zuria and Meier, Johannes Michael and Pollefeys, Marc and Cremers, Daniel and Wysocki, Olaf},
+  author    = {Dhaouadi, Oussema and Bauer, Zuria and Meier, Johannes and Pollefeys, Marc and Cremers, Daniel and Wysocki, Olaf},
   booktitle = {IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
   year      = {2027}
 }
