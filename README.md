@@ -147,7 +147,7 @@ python scripts/evaluate_subset.py \
 
 The evaluator requires every requested query, rejects duplicate IDs and invalid errors, and includes fallback poses. It reports joint recall and mean/median translation and full-rotation errors. The paper's main SemCityLockeD comparison uses 937 rectified queries. Published SemCityLoc results follow their original evaluation protocol and report mean translation and yaw errors.
 
-The supplement also evaluates the exact 188-query list supplied by a SemCityLoc author, using the same rectified images, priors, and five-update budget as our full evaluation:
+The bottom block of Table 2 also reports our results on the exact 188-query list supplied by a SemCityLoc author, using the same rectified images, priors, and five-update budget as our full evaluation:
 
 | City model | R @ 2 m / 2° ↑ | R @ 3 m / 3° ↑ | R @ 5 m / 5° ↑ | Median translation ↓ | Median rotation ↓ |
 |---|---:|---:|---:|---:|---:|
