@@ -167,7 +167,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "second",
               "rotation": "second"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "LoD-Loc v3\u2020",
@@ -187,7 +187,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": null,
               "rotation": "second"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "SemCityLoc\u2020",
@@ -207,7 +207,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "best",
               "rotation": "best"
             },
-            "note": "Complete oracle re-evaluation with corrected camera-intrinsics scaling and strict full-rotation metrics, independently checked against dataset GT."
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "MC-Loc",
@@ -494,7 +494,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "second",
               "rotation": "second"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "LoD-Loc v3\u2020",
@@ -514,7 +514,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": null,
               "rotation": null
             },
-            "note": "Complete 2,192-query evaluation: 1,700 saved poses plus a 492-query continuation (seed 0); original RNG state and execution snapshot unavailable. See supplementary protocol."
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "SemCityLoc\u2020",
@@ -534,7 +534,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "best",
               "rotation": "best"
             },
-            "note": "Complete oracle re-evaluation with corrected camera-intrinsics scaling and strict full-rotation metrics, independently checked against dataset GT."
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "MC-Loc",
@@ -827,7 +827,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "second",
               "rotation": "second"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "LoD-Loc v3\u2020",
@@ -847,7 +847,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": null,
               "rotation": null
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "SemCityLoc\u2020",
@@ -867,7 +867,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "best",
               "rotation": "best"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "MC-Loc",
@@ -1154,7 +1154,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "second",
               "rotation": "second"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "LoD-Loc v3\u2020",
@@ -1174,7 +1174,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": null,
               "rotation": null
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "SemCityLoc\u2020",
@@ -1194,7 +1194,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "best",
               "rotation": "best"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "MC-Loc",
@@ -1407,7 +1407,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "best",
               "rotation": "best"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "LoD-Loc v3\u2020",
@@ -1427,7 +1427,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": null,
               "rotation": "second"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "SemCityLoc\u2020",
@@ -1447,7 +1447,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "second",
               "rotation": null
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "MC-Loc\u2021",
@@ -1634,7 +1634,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "best",
               "rotation": "best"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "LoD-Loc v3\u2020",
@@ -1654,7 +1654,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": null,
               "rotation": "second"
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "SemCityLoc\u2020",
@@ -1674,7 +1674,7 @@ window.MATCHCITYLOC_BENCHMARKS = [
               "translation": "second",
               "rotation": null
             },
-            "note": ""
+            "note": "Adapted oracle evaluation using masks rendered at the ground-truth pose, with the public nvdiffrast renderer."
           },
           {
             "method": "MC-Loc\u2021",
@@ -1796,6 +1796,48 @@ window.MATCHCITYLOC_BENCHMARKS = [
             "r5": 40.45,
             "ranks": {},
             "note": "LoD1 ablation; no baseline results reported."
+          }
+        ]
+      },
+      {
+        "split": "Author-provided subset (188 queries)",
+        "lod": "LoD2",
+        "source": "Supplementary Table A3",
+        "rows": [
+          {
+            "method": "MatchCityLoc (Ours)",
+            "vision": "MINIMA (RoMa)",
+            "setup": "O",
+            "group": "off",
+            "map": "LoD",
+            "ranks": {},
+            "note": "All 188 author-provided query IDs. Five refinement updates. Full-rotation errors, not yaw-only errors.",
+            "r2": 57.45,
+            "r3": 63.3,
+            "r5": 72.34,
+            "translation": 1.46,
+            "rotation": 1.16
+          }
+        ]
+      },
+      {
+        "split": "Author-provided subset (188 queries)",
+        "lod": "LoD3",
+        "source": "Supplementary Table A3",
+        "rows": [
+          {
+            "method": "MatchCityLoc (Ours)",
+            "vision": "MINIMA (RoMa)",
+            "setup": "O",
+            "group": "off",
+            "map": "LoD",
+            "ranks": {},
+            "note": "All 188 author-provided query IDs. Five refinement updates. Full-rotation errors, not yaw-only errors.",
+            "r2": 67.55,
+            "r3": 76.6,
+            "r5": 84.57,
+            "translation": 1.0,
+            "rotation": 0.88
           }
         ]
       }

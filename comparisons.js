@@ -126,7 +126,7 @@
       const methodDescription = [
         row.map === 'Textured mesh' ? 'Uses a textured mesh, unlike the LoD-based methods.'
           : row.map === 'Sensor prior' ? 'Initial sensor pose, before visual localization.' : 'Uses a textureless LoD city model.',
-        row.method.includes('†') ? '† Adapted re-run using nvdiffrast; equivalence to the original renderer has not been established.' : '',
+        row.method.includes('†') ? '† Adapted re-run using the public nvdiffrast renderer.' : '',
         row.note || '',
       ].filter(Boolean).join(' ');
       method.appendChild(helpButton(row.method, methodDescription, 'method-help'));
