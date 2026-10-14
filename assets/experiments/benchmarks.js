@@ -1370,6 +1370,26 @@ window.MATCHCITYLOC_BENCHMARKS = [
             "note": "Reported by SemCityLoc under its source protocol; errors are mean translation and yaw, not median translation and full rotation."
           },
           {
+            "method": "SemCityLoc\u2021",
+            "vision": "DINOv3+DPT",
+            "setup": "I",
+            "group": "trained",
+            "map": "LoD",
+            "translation": 2.62,
+            "rotation": 0.42,
+            "r2": 69.15,
+            "r3": 84.04,
+            "r5": 89.36,
+            "ranks": {
+              "r2": null,
+              "r3": null,
+              "r5": null,
+              "translation": null,
+              "rotation": null
+            },
+            "note": "Reported by SemCityLoc under its source protocol; errors are mean translation and yaw, not median translation and full rotation."
+          },
+          {
             "method": "LoD-Loc v2\u2020",
             "vision": "--",
             "setup": "GT",
@@ -1577,6 +1597,26 @@ window.MATCHCITYLOC_BENCHMARKS = [
             "note": "Reported by SemCityLoc under its source protocol; errors are mean translation and yaw, not median translation and full rotation."
           },
           {
+            "method": "SemCityLoc\u2021",
+            "vision": "DINOv3+DPT",
+            "setup": "I",
+            "group": "trained",
+            "map": "LoD",
+            "translation": 2.48,
+            "rotation": 0.5,
+            "r2": 70.21,
+            "r3": 75.53,
+            "r5": 89.36,
+            "ranks": {
+              "r2": null,
+              "r3": null,
+              "r5": null,
+              "translation": null,
+              "rotation": null
+            },
+            "note": "Reported by SemCityLoc under its source protocol; errors are mean translation and yaw, not median translation and full rotation."
+          },
+          {
             "method": "LoD-Loc v2\u2020",
             "vision": "--",
             "setup": "GT",
@@ -1756,100 +1796,6 @@ window.MATCHCITYLOC_BENCHMARKS = [
             "r5": 40.45,
             "ranks": {},
             "note": "LoD1 ablation; no baseline results reported."
-          }
-        ]
-      },
-      {
-        "split": "Author-provided subset (188 queries)",
-        "lod": "LoD2",
-        "source": "Table 2, bottom block (original protocols)",
-        "rows": [
-          {
-            "method": "SemCityLoc\u2021",
-            "vision": "DINOv3+DPT",
-            "setup": "I",
-            "group": "trained",
-            "map": "LoD",
-            "translation": 2.62,
-            "rotation": 0.42,
-            "r2": 69.15,
-            "r3": 84.04,
-            "r5": 89.36,
-            "ranks": {
-              "r2": null,
-              "r3": null,
-              "r5": null,
-              "translation": null,
-              "rotation": null
-            },
-            "note": "Reported by SemCityLoc under its source protocol; errors are mean translation and yaw, not median translation and full rotation."
-          },
-          {
-            "method": "MatchCityLoc (Ours)",
-            "vision": "MINIMA (RoMa)",
-            "setup": "O",
-            "group": "off",
-            "map": "LoD",
-            "translation": 1.46,
-            "rotation": 1.16,
-            "r2": 57.45,
-            "r3": 63.3,
-            "r5": 72.34,
-            "ranks": {
-              "r2": null,
-              "r3": null,
-              "r5": null,
-              "translation": null,
-              "rotation": null
-            },
-            "note": "All 188 author-provided query IDs. Five refinement updates. Median translation and full-rotation errors, not mean/yaw errors."
-          }
-        ]
-      },
-      {
-        "split": "Author-provided subset (188 queries)",
-        "lod": "LoD3",
-        "source": "Table 2, bottom block (original protocols)",
-        "rows": [
-          {
-            "method": "SemCityLoc\u2021",
-            "vision": "DINOv3+DPT",
-            "setup": "I",
-            "group": "trained",
-            "map": "LoD",
-            "translation": 2.48,
-            "rotation": 0.5,
-            "r2": 70.21,
-            "r3": 75.53,
-            "r5": 89.36,
-            "ranks": {
-              "r2": null,
-              "r3": null,
-              "r5": null,
-              "translation": null,
-              "rotation": null
-            },
-            "note": "Reported by SemCityLoc under its source protocol; errors are mean translation and yaw, not median translation and full rotation."
-          },
-          {
-            "method": "MatchCityLoc (Ours)",
-            "vision": "MINIMA (RoMa)",
-            "setup": "O",
-            "group": "off",
-            "map": "LoD",
-            "translation": 1.0,
-            "rotation": 0.88,
-            "r2": 67.55,
-            "r3": 76.6,
-            "r5": 84.57,
-            "ranks": {
-              "r2": null,
-              "r3": null,
-              "r5": null,
-              "translation": null,
-              "rotation": null
-            },
-            "note": "All 188 author-provided query IDs. Five refinement updates. Median translation and full-rotation errors, not mean/yaw errors."
           }
         ]
       }
