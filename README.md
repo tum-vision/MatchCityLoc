@@ -33,7 +33,7 @@
 
 MatchCityLoc refines a noisy camera-pose prior against a textureless **LoD city model** by matching **surface normals**. It uses pretrained models without dataset-specific training.
 
-Experiments demonstrate strong pose recall and accurate translation and rotation among the evaluated off-the-shelf LoD-based methods. These findings support accurate urban UAV localization using lightweight city geometry, without textured maps or dataset-specific training.
+Experiments demonstrate strong pose recall and accurate translation and rotation among the evaluated off-the-shelf LoD-based methods. By bridging the modality gap between aerial imagery and texture-free geometry, MatchCityLoc enables accurate localization using lightweight, privacy-preserving city models.
 
 ## 🚀 How it works
 
