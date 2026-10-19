@@ -2,8 +2,8 @@
 
 <img src="assets/matchcityloc-animated.svg" width="360" alt="MatchCityLoc: a hovering drone matches image geometry to a LoD building"/>
 
-<h1>MatchCityLoc: Aerial Localization in LoD City Models via Surface Normal Matching</h1>
-<h2>WACV 2027</h2>
+<h3>MatchCityLoc: Aerial Localization in LoD City Models via Surface Normal Matching</h3>
+<p><strong>WACV 2027</strong></p>
 
 <p>
   <a href="https://tum-vision.github.io/MatchCityLoc/"><img src="https://img.shields.io/badge/🌐-Project%20Page-3e5aef" alt="Project page"></a>
