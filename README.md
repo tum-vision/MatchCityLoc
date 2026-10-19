@@ -28,7 +28,11 @@
 </div>
 
 <p align="center">
-  <img src="assets/teaser.png" width="92%" alt="MatchCityLoc teaser"/>
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/teaser-dark.svg"/>
+    <source media="(prefers-color-scheme: light)" srcset="assets/teaser-light.svg"/>
+    <img src="assets/teaser-light.svg" width="100%" alt="Silhouette alignment scores building masks in 2D. MatchCityLoc matches surface normals and solves the pose in 3D with PnP."/>
+  </picture>
 </p>
 
 MatchCityLoc refines a noisy camera-pose prior against a textureless **LoD city model** by matching **surface normals**. It uses pretrained models without dataset-specific training.
