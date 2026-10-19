@@ -44,7 +44,7 @@ wandb/
 runs/
 *.log
 logs/
-slurm/logs/
+/slurm/
 *.out
 *.err
 
@@ -71,6 +71,7 @@ video/
 .codex/
 .deps/
 .models/
+/CITATION.bib
 
 # Scratch
 scratch_*.py

@@ -24,9 +24,9 @@ def test_seed_is_order_independent_and_frame_specific():
 
 def test_main_launchers_use_reported_budgets():
     for split in ('intraj', 'outtraj'):
-        assert '--num_iterations 3' in (ROOT/f'slurm/eval_matching_uavd4l_lod3_{split}.sh').read_text()
+        assert '--num_iterations 3' in (ROOT/f'scripts/eval/eval_matching_uavd4l_lod3_{split}.sh').read_text()
     for split in ('inplace', 'outplace'):
-        text = (ROOT/f'slurm/eval_matching_swiss_{split}.sh').read_text()
+        text = (ROOT/f'scripts/eval/eval_matching_swiss_{split}.sh').read_text()
         assert '--num_iterations 5' in text
         assert '--query_seed 20261019' in text
     ast.parse((ROOT/'pipeline_matching.py').read_text())

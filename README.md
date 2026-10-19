@@ -135,7 +135,14 @@ PYTHONPATH=. python -u pipeline_matching.py \
     --out outputs/eval_semcity_lod3
 ```
 
-Use `python pipeline_matching.py --help` for dataset, matcher, modality, and ablation options. Example cluster launchers are provided in [slurm/](slurm/README.md). Set the partition and resource limits for your cluster, and choose the iteration count for the evaluation protocol you intend to run.
+Use `python pipeline_matching.py --help` for dataset, matcher, modality, and ablation options. Ordinary Bash launchers are provided in [scripts/eval/](scripts/eval/README.md). Activate your Python environment, then run, for example:
+
+```bash
+bash scripts/eval/eval_matching_semcity_lod3.sh
+DRY_RUN=1 bash scripts/eval/run_ablation_foundation_matching.sh all
+```
+
+The launchers use the active environment and run on a local GPU machine without a job scheduler. Set `CUDA_VISIBLE_DEVICES` to choose a GPU, or `PYTHON` to choose a Python executable. Additional pipeline options can be appended to the commands.
 
 The main comparison uses three updates on UAVD4L-LoD and five on Swiss-EPFL and SemCityLockeD. Modality and matcher ablations use three updates, normal-predictor ablations use four, and prior-noise experiments use two. Each comparison retains every query at its last accepted pose, or its prior if refinement fails.
 
