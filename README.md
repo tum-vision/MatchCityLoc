@@ -7,7 +7,7 @@
 
 <p>
   <a href="https://tum-vision.github.io/MatchCityLoc/"><img src="https://img.shields.io/badge/🌐-Project%20Page-3e5aef" alt="Project page"></a>
-  <a href="https://youtu.be/TWEFaWydEU8"><img src="https://img.shields.io/badge/▶-Video-ff0000" alt="Video"></a>
+  <a href="https://youtu.be/t8HD93sMhws"><img src="https://img.shields.io/badge/▶-Video-ff0000" alt="Video"></a>
   <img src="https://img.shields.io/badge/📄-Paper%20coming%20soon-grey" alt="Paper coming soon">
   <a href="datasets/README.md"><img src="https://img.shields.io/badge/📊-Datasets-326b69" alt="Datasets"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg" alt="License"></a>
