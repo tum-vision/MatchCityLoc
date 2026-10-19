@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="assets/matchcityloc-animated.gif" width="360" alt="MatchCityLoc: a hovering drone matches image geometry to a LoD building"/>
+<img src="assets/matchcityloc-animated.svg" width="360" alt="MatchCityLoc: a hovering drone matches image geometry to a LoD building"/>
 
 <h1>MatchCityLoc: Aerial Localization in LoD City Models via Surface Normal Matching</h1>
 <h2>WACV 2027</h2>
