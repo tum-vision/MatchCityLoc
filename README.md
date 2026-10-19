@@ -97,9 +97,9 @@ Download and prepare the complete public release automatically:
 python scripts/prepare_semcitylocked.py data/SemCityLockeD
 ```
 
-This creates a runnable dataset from the public DJI images and automatically verifies the models and annotations. The public images require approximate rectification; exact paper reproduction requires the original 937 rectified images. See [dataset details](datasets/SemCityLockeD/README.md).
+The public dataset is available. This command downloads the 937 matching query images and the LoD models, verifies the annotations, and corrects lens distortion using the public camera calibration. The original paper used a different rectified image export, so this runnable public-data setup is not an exact pixel-for-pixel reproduction of that export. See [dataset details](datasets/SemCityLockeD/README.md).
 
-### UAVD4L-LoDv2 and Swiss-EPFLv2
+### UAVD4L-LoD and Swiss-EPFL
 
 Download both datasets from the [LoD-Loc release](https://github.com/VictorZoo/LoD-Loc) ([Baidu archive](https://pan.baidu.com/s/1Ue37i0OQpS2jzo-fQ3o4bA?pwd=xxdv), code `xxdv`), copy the extracted dataset folders under `data/`, and convert the meshes:
 
@@ -125,7 +125,7 @@ PYTHONPATH=. python -u pipeline_matching.py \
 
 The run is successful when it reaches `MATCHING PIPELINE COMPLETED` and writes `outputs/smoke_test/metrics.json`. The first execution is slower because MoGe-2 and MINIMA weights are downloaded.
 
-Evaluate SemCityLockeD with the paper settings:
+Evaluate SemCityLockeD with five refinement updates:
 
 ```bash
 PYTHONPATH=. python -u pipeline_matching.py \
@@ -136,6 +136,10 @@ PYTHONPATH=. python -u pipeline_matching.py \
 ```
 
 Use `python pipeline_matching.py --help` for dataset, matcher, modality, and ablation options. Example cluster launchers are provided in [slurm/](slurm/README.md). Set the partition and resource limits for your cluster, and choose the iteration count for the evaluation protocol you intend to run.
+
+The main comparison uses three updates on UAVD4L-LoD and five on Swiss-EPFL and SemCityLockeD. Modality and matcher ablations use three updates, normal-predictor ablations use four, and prior-noise experiments use two. Each comparison retains every query at its last accepted pose, or its prior if refinement fails.
+
+For the Swiss-EPFL main results, use `--num_iterations 5 --query_seed 20261019`. The query seed controls matching and PnP independently of query order. `--random_seed` separately controls synthetic prior perturbations.
 
 The paper's SemCityLockeD comparison uses 937 rectified queries. Published SemCityLoc results follow their original evaluation protocol and report mean translation and yaw errors, unlike our median translation and full-rotation errors.
 

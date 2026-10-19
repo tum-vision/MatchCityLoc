@@ -36,6 +36,7 @@ Usage::
 import argparse
 import json
 import os
+import random
 import sys
 import time
 from pathlib import Path
@@ -61,6 +62,7 @@ from utils.normal_estimators import load_normal_estimator, ALL_KEYS as NORMAL_MO
 from utils.lod import LoD
 from utils.pipeline_config import PipelineRunConfig
 from utils.timing import GpuTimer
+from utils.reproducibility import query_seed
 
 from utils.eval_helpers import _safe_metrics, _recall_pct
 from utils.pose import pose_error as pnp_pose_error
@@ -822,8 +824,8 @@ def main():
     parser.add_argument('--matcher_key', type=str, default='minima(RoMa)',
                         help='Matcher key from imcui app.yaml.')
     parser.add_argument('--vis', action='store_true', help='Generate iterative visualisation plots.')
-    parser.add_argument('--num_iterations', type=int, default=5,
-                        help='Number of pose-refinement updates. Main comparisons use 3 for UAVD4L/Swiss and 5 for SemCityLockeD.')
+    parser.add_argument('--num_iterations', type=int, default=None,
+                        help='Pose-refinement updates. Defaults to 3 for UAVD4L-LoD and 5 for Swiss-EPFL or SemCityLockeD.')
     parser.add_argument('--mesh_path', type=str, default=None,
                         help='Override LoD mesh path.')
     parser.add_argument('--batchsize', type=int, default=None,
@@ -837,12 +839,18 @@ def main():
     parser.add_argument('--perturb_gt_r', type=float, default=0.0,
                         help='Rotation noise to add to GT pose instead of using GPS (degrees)')
     parser.add_argument('--random_seed', type=int, default=None)
+    parser.add_argument('--query_seed', type=int, default=None,
+                        help='Base seed for order-independent per-query matching and PnP. Swiss-EPFL main results use 20261019.')
     parser.add_argument('--normal_model', type=str, default='moge2-vits',
                         choices=NORMAL_MODEL_KEYS,
                         help='Normal estimator backbone for the UAV image '
                              '(default: moge2-vits). Options: '
                              + ', '.join(NORMAL_MODEL_KEYS))
     args = parser.parse_args()
+    if args.num_iterations is None:
+        args.num_iterations = 3 if args.dataset == 'uavd4l' else 5
+    if args.num_iterations < 1:
+        parser.error('--num_iterations must be positive')
 
     # ── Resolve config + data root ────────────────────────────────────────
     if args.data_root is None:
@@ -975,6 +983,16 @@ def main():
         )
         tqdm.write(f"  GPS prior:  t={gps_te:.2f}m  R={gps_re:.2f}°")
 
+        # Seed each query independently so subsets and full runs use the same RNG state.
+        if args.query_seed is not None:
+            seed = query_seed(args.query_seed, args.dataset, args.split, img_name)
+            random.seed(seed)
+            np.random.seed(seed)
+            torch.manual_seed(seed)
+            if torch.cuda.is_available():
+                torch.cuda.manual_seed_all(seed)
+            cv2.setRNGSeed(seed)
+
         # Run matching pipeline
         w2c_pred, iter_history, timings, vis_data = pipeline.estimate_pose(
             sample, lod_full, K,
@@ -1010,6 +1028,8 @@ def main():
             't_pnp':                   timings['pnp'],
             't_total':                 timings['total'],
         }
+        if args.query_seed is not None:
+            metrics['query_seed'] = seed
 
         # Calculate ablation metrics
         if gt_pose is not None and len(iter_history) > 0:

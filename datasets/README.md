@@ -1,6 +1,6 @@
 # Datasets
 
-MatchCityLoc evaluates on UAVD4L-LoDv2, Swiss-EPFLv2, and SemCityLockeD. Run all commands from the repository root.
+MatchCityLoc evaluates on UAVD4L-LoD, Swiss-EPFL, and SemCityLockeD. The main comparisons use LoD3 for UAVD4L-LoD and LoD2 for Swiss-EPFL. Run all commands from the repository root.
 
 ## SemCityLockeD
 
@@ -12,7 +12,7 @@ python scripts/prepare_semcitylocked.py data/SemCityLockeD
 
 The script downloads the pinned [SemCityLockeD release](https://huggingface.co/datasets/DevinEaston/SemCityLockeD), selects the 937 evaluation frames, creates the expected layout, and verifies the models and annotations.
 
-The public DJI images are distorted, while the paper used rectified images. By default, the script creates a runnable approximation using the DJI factory calibration. This is suitable for using the code, but not for claiming exact reproduction of the paper numbers.
+The dataset itself is available. The public DJI images have lens distortion, while the paper used a separately rectified image export. By default, the script selects the same 937 filenames and rectifies the public images using the DJI factory calibration. The models, poses and evaluation queries match, but the processed image pixels differ. This provides a runnable public-data evaluation, not an exact reproduction of the paper's image preprocessing.
 
 If the exact rectified images are available:
 
@@ -24,7 +24,7 @@ python scripts/prepare_semcitylocked.py data/SemCityLockeD \
 
 Use `--image-mode raw-only` to download the public images without rectifying them. See [SemCityLockeD provenance](SemCityLockeD/README.md) for the exact release revision and image comparison.
 
-## UAVD4L-LoDv2
+## UAVD4L-LoD
 
 Download `UAVD4L-LoD/` and `MODEL/UAVD4L-LoD.obj` from the [LoD-Loc release](https://github.com/VictorZoo/LoD-Loc) ([Baidu archive](https://pan.baidu.com/s/1Ue37i0OQpS2jzo-fQ3o4bA?pwd=xxdv), code `xxdv`). Then run:
 
@@ -38,7 +38,7 @@ PYTHONPATH=. python utils/obj_to_ply.py \
 
 The expected splits are `data/UAVD4L-LoD/inTraj/` and `data/UAVD4L-LoD/outTraj/`.
 
-## Swiss-EPFLv2
+## Swiss-EPFL
 
 Download `Swiss-EPFL/` and `MODEL/Swiss-EPFL-LoD.obj` from the same LoD-Loc archive. Then run:
 

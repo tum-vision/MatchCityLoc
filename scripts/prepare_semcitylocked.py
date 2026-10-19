@@ -42,9 +42,17 @@ def paper_names(annotation: Path) -> list[str]:
 
 
 def link_or_copy(source: Path, target: Path, force: bool = False) -> None:
+    # Hugging Face snapshots contain relative symlinks into their blob cache.
+    # Link the file itself, not a symlink that would break in the new directory.
+    source = source.resolve(strict=True)
     target.parent.mkdir(parents=True, exist_ok=True)
     if target.exists() or target.is_symlink():
         if not force:
+            if not target.is_file():
+                raise RuntimeError(
+                    f"Existing target is not a readable file: {target}. "
+                    "Use a new preparation directory to preserve existing files."
+                )
             return
         target.unlink()
     try:
