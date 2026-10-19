@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="style.css?v=15">
   <script defer src="citation.js?v=1"></script>
   <script defer src="app.js?v=2"></script>
-  <script defer src="assets/experiments/benchmarks.js?v=table2-full-evaluation"></script>
+  <script defer src="assets/experiments/benchmarks.js?v=verified-results-20261019"></script>
   <script defer src="assets/experiments/qualitative-data.js?v=camera-ready-1"></script>
   <script defer src="comparisons.js?v=5"></script>
   <script defer src="logo.js?v=5"></script>
@@ -248,10 +248,10 @@
           <caption>Median pose error and recall from Tables 1–2.</caption>
           <thead><tr><th scope="col">Dataset</th><th scope="col">Split / model</th><th scope="col">Translation ↓</th><th scope="col">Rotation ↓</th><th scope="col">R @ 2 m / 2° ↑</th><th scope="col">R @ 5 m / 5° ↑</th></tr></thead>
           <tbody>
-            <tr><th scope="row">UAVD4L-LoDv2</th><td>in-Traj · LoD3</td><td>0.62 m</td><td>0.34°</td><td>92.64%</td><td>98.44%</td></tr>
-            <tr><th scope="row">UAVD4L-LoDv2</th><td>out-of-Traj · LoD3</td><td>0.66 m</td><td>0.28°</td><td>94.66%</td><td>99.22%</td></tr>
-            <tr class="group-start"><th scope="row">Swiss-EPFLv2</th><td>in-Place · LoD2</td><td>1.43 m</td><td>1.02°</td><td>66.5%</td><td>94.2%</td></tr>
-            <tr><th scope="row">Swiss-EPFLv2</th><td>out-of-Place · LoD2</td><td>1.30 m</td><td>0.95°</td><td>69.3%</td><td>96.1%</td></tr>
+            <tr><th scope="row">UAVD4L-LoD</th><td>in-Traj · LoD3</td><td>0.62 m</td><td>0.34°</td><td>92.64%</td><td>98.44%</td></tr>
+            <tr><th scope="row">UAVD4L-LoD</th><td>out-of-Traj · LoD3</td><td>0.66 m</td><td>0.28°</td><td>94.66%</td><td>99.22%</td></tr>
+            <tr class="group-start"><th scope="row">Swiss-EPFL</th><td>in-Place · LoD2</td><td>2.02 m</td><td>1.64°</td><td>45.51%</td><td>74.16%</td></tr>
+            <tr><th scope="row">Swiss-EPFL</th><td>out-of-Place · LoD2</td><td>0.99 m</td><td>1.16°</td><td>72.82%</td><td>89.71%</td></tr>
             <tr class="group-start"><th scope="row">SemCityLockeD</th><td>LoD2</td><td>1.45 m</td><td>1.14°</td><td>59.12%</td><td>77.16%</td></tr>
             <tr><th scope="row">SemCityLockeD</th><td>LoD3</td><td>0.87 m</td><td>0.81°</td><td>70.33%</td><td>86.34%</td></tr>
           </tbody>
