@@ -2,7 +2,7 @@
 
 Static project page for **MatchCityLoc: Aerial Localization in LoD City Models via Surface Normal Matching**, WACV 2027.
 
-[Project page](https://tum-vision.github.io/MatchCityLoc/) · [Code](https://github.com/tum-vision/MatchCityLoc) · [Video](https://youtu.be/TWEFaWydEU8) · Paper coming soon
+[Project page](https://tum-vision.github.io/MatchCityLoc/) · [Code](https://github.com/tum-vision/MatchCityLoc) · [Video](https://youtu.be/t8HD93sMhws) · Paper coming soon
 
 ## Local preview
 
