@@ -12,4 +12,4 @@ Institution logos identify the authors' affiliations and remain the property of 
 
 ## Scientific figures
 
-Query images, predicted and rendered normals, qualitative image panels and benchmark tables are the MatchCityLoc authors' presentation assets for the paper. The datasets are UAVD4L-LoDv2, Swiss-EPFLv2 and SemCityLockeD. Please consult the code branch's dataset documentation for access and terms.
+Query images, predicted and rendered normals, qualitative image panels and benchmark tables are the MatchCityLoc authors' presentation assets for the paper. The datasets are UAVD4L-LoD, Swiss-EPFL and SemCityLockeD. Please consult the code branch's dataset documentation for access and terms.
