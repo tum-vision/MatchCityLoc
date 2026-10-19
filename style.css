@@ -295,6 +295,9 @@ select:disabled { background: var(--tint); }
 #benchmark-table .ours th { font-weight: 700; color: var(--accent); }
 #benchmark-table .metric-best { font-weight: 700; }
 #benchmark-table .metric-second { text-decoration: underline; text-underline-offset: 3px; text-decoration-thickness: 1px; }
+#benchmark-table .benchmark-group-heading th { text-align: left; white-space: normal; }
+#benchmark-table .benchmark-group-major th { padding: 12px 9px 9px; background: var(--tint); border-top: 2px solid var(--ink); color: var(--ink); font-weight: 700; }
+#benchmark-table .benchmark-group-minor th { padding: 9px 18px; background: var(--surface); color: var(--muted); font-weight: 600; border-bottom: 1px solid var(--control-border); }
 .table-help { font: inherit; color: inherit; cursor: help; }
 .method-help { border: 0; padding: 0; background: none; text-align: left; }
 .method-help:hover, .method-help:focus-visible { text-decoration: underline dotted; text-underline-offset: 4px; }

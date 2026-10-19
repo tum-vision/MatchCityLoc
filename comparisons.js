@@ -13,6 +13,7 @@
   let sortKey = null;
   let ascending = true;
   const bestFirstAscending = key => !['r2', 'r3', 'r5'].includes(key);
+  const comparisonGroup = row => `${row.map}:${row.group}`;
   const setupNames = {
     O: 'Off-the-shelf models, without scene-specific training.',
     I: 'In-domain training: trained on imagery from the evaluation domain.',
@@ -94,21 +95,26 @@
     lodSelect.disabled = lods.length === 1;
   }
   function updateDataset() {
+    sortKey = null;
     const splits = [...new Set(dataset().variants.map(item => item.split))];
     options(splitSelect, splits.map(value => [value, value]), splitSelect.value);
     splitSelect.disabled = splits.length === 1;
     updateLods();
     // Start with a full comparison rather than the single-method LoD1 ablation.
-    if (datasetSelect.value === 'semcity') lodSelect.value = 'LoD3';
+    if (datasetSelect.value === 'semcity') lodSelect.value = 'LoD2';
     render();
   }
   function render() {
     hideTooltip();
     const selected = variant();
     const rows = selected.rows.filter(row => groupSelect.value === 'all' || row.group === groupSelect.value);
+    const groupOrder = [...new Set(selected.rows.map(comparisonGroup))];
     // Keep the camera-ready table's comparison groups and protocol exclusions.
     // Filtering/sorting must not promote an oracle or source-protocol result.
     if (sortKey) rows.sort((a, b) => {
+      // Keep incompatible map types and evaluation setups in their paper groups.
+      const groupDelta = groupOrder.indexOf(comparisonGroup(a)) - groupOrder.indexOf(comparisonGroup(b));
+      if (groupDelta) return groupDelta;
       const av = a[sortKey], bv = b[sortKey];
       // Missing results always remain last, regardless of direction.
       if (av === null && bv === null) return 0;
@@ -118,9 +124,33 @@
       return ascending ? delta : -delta;
     });
     body.replaceChildren();
+    function groupHeading(label, level) {
+      const heading = document.createElement('tr');
+      heading.className = `benchmark-group-heading benchmark-group-${level}`;
+      const cell = document.createElement('th');
+      cell.colSpan = 8;
+      cell.textContent = label;
+      heading.appendChild(cell);
+      body.appendChild(heading);
+    }
+    let previousMap = null, previousGroup = null;
     for (const row of rows) {
+      if (row.map !== previousMap && row.map !== 'Sensor prior') {
+        groupHeading(row.map === 'Textured mesh' ? 'Textured Mesh-based Models' : 'LoD-based Models', 'major');
+      }
+      if (row.map === 'LoD' && comparisonGroup(row) !== previousGroup) {
+        const labels = {
+          trained: selected.source === 'Table 2' ? 'Requires training (published)' : 'Requires training',
+          oracle: 'Oracle (GT masks)', off: 'Off-the-shelf',
+        };
+        groupHeading(labels[row.group], 'minor');
+      }
+      previousMap = row.map;
+      previousGroup = comparisonGroup(row);
       const tr = document.createElement('tr');
-      if (row.method.startsWith('MatchCityLoc')) tr.className = 'ours';
+      tr.className = 'benchmark-result';
+      tr.dataset.group = comparisonGroup(row);
+      if (row.method.startsWith('MatchCityLoc')) tr.classList.add('ours');
       const method = document.createElement('th');
       method.scope = 'row';
       const methodDescription = [
@@ -137,7 +167,7 @@
         method.appendChild(map);
       }
       tr.appendChild(method);
-      for (const key of ['vision', 'setup', 'translation', 'rotation', 'r2', 'r3', 'r5']) {
+      for (const key of ['vision', 'setup', 'r2', 'r3', 'r5', 'translation', 'rotation']) {
         const cell = document.createElement('td');
         cell.dataset.metric = key;
         const value = row[key];
@@ -171,16 +201,16 @@
         : `Sort ${selected ? ascending ? 'descending' : 'ascending' : bestFirstAscending(button.dataset.sort) ? 'ascending' : 'descending'}`;
     });
     document.querySelector('#benchmark-caption').textContent = `${dataset().label} · ${selected.split} · ${selected.lod} — ${selected.source}. Recall in %, median errors; ‡ marks source-protocol mean translation/yaw.`;
-    let note = `${rows.length} methods / configurations. ${sortKey ? `Sorted by ${sortButtons.find(b => b.dataset.sort === sortKey).textContent.replace(/[↕↑↓]/g, '').trim()}, ${ascending ? 'ascending' : 'descending'}.` : 'Original paper order.'}`;
+    let note = `${rows.length} methods / configurations. ${sortKey ? `Sorted within each paper group by ${sortButtons.find(b => b.dataset.sort === sortKey).textContent.replace(/[↕↑↓]/g, '').trim()}, ${ascending ? 'ascending' : 'descending'}.` : 'Original paper order.'}`;
     if (selected.lod === 'LoD1') note += ' Only MatchCityLoc is reported in the LoD1 ablation; baseline results are not available.';
     else if (rows.some(row => row.translation === null)) note += ' — means not reported; missing values sort last.';
     document.querySelector('#benchmark-summary').textContent = note;
   }
   options(datasetSelect, datasets.map(item => [item.id, item.label]));
   datasetSelect.addEventListener('change', updateDataset);
-  splitSelect.addEventListener('change', () => { updateLods(); render(); });
-  lodSelect.addEventListener('change', render);
-  groupSelect.addEventListener('change', render);
+  splitSelect.addEventListener('change', () => { sortKey = null; updateLods(); render(); });
+  lodSelect.addEventListener('change', () => { sortKey = null; render(); });
+  groupSelect.addEventListener('change', () => { sortKey = null; render(); });
   sortButtons.forEach(button => button.addEventListener('click', () => {
     const key = button.dataset.sort;
     if (sortKey !== key) {

@@ -214,7 +214,7 @@
 
     <section class="section container" id="results">
       <h2>Quantitative results</h2>
-      <p class="section-intro">Compare methods by dataset and model detail. Click a heading to sort, reverse, then restore paper order.</p>
+      <p class="section-intro">Tables follow the paper's order and comparison groups. Click a heading to sort within each group, reverse, then restore paper order.</p>
       <div id="benchmark-explorer" hidden>
         <div class="benchmark-controls">
           <label>Dataset<select id="benchmark-dataset"></select></label>
@@ -230,11 +230,11 @@
               <th scope="col" aria-sort="none"><button type="button" data-sort="method">Method <span aria-hidden="true">↕</span></button></th>
               <th scope="col" aria-sort="none"><button type="button" data-sort="vision">Vision model <span aria-hidden="true">↕</span></button></th>
               <th scope="col" aria-sort="none"><button type="button" data-sort="setup">Setup <span aria-hidden="true">↕</span></button></th>
-              <th scope="col" aria-sort="none"><button type="button" data-sort="translation">T.e. (m) ↓ <span aria-hidden="true">↕</span></button></th>
-              <th scope="col" aria-sort="none"><button type="button" data-sort="rotation">R.e. (°) ↓ <span aria-hidden="true">↕</span></button></th>
               <th scope="col" aria-sort="none"><button type="button" data-sort="r2">R @ 2 m / 2° ↑ <span aria-hidden="true">↕</span></button></th>
               <th scope="col" aria-sort="none"><button type="button" data-sort="r3">R @ 3 m / 3° ↑ <span aria-hidden="true">↕</span></button></th>
               <th scope="col" aria-sort="none"><button type="button" data-sort="r5">R @ 5 m / 5° ↑ <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="translation">T.e. (m) ↓ <span aria-hidden="true">↕</span></button></th>
+              <th scope="col" aria-sort="none"><button type="button" data-sort="rotation">R.e. (°) ↓ <span aria-hidden="true">↕</span></button></th>
             </tr></thead>
             <tbody id="benchmark-body"></tbody>
           </table>
