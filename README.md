@@ -8,7 +8,7 @@
 <p>
   <a href="https://tum-vision.github.io/MatchCityLoc/"><img src="https://img.shields.io/badge/🌐-Project%20Page-3e5aef" alt="Project page"></a>
   <a href="https://youtu.be/t8HD93sMhws"><img src="https://img.shields.io/badge/▶-Video-ff0000" alt="Video"></a>
-  <img src="https://img.shields.io/badge/📄-Paper%20coming%20soon-grey" alt="Paper coming soon">
+  <a href="https://arxiv.org/abs/2610.27110"><img src="https://img.shields.io/badge/arXiv-2610.27110-b31b1b" alt="Paper on arXiv"></a>
   <a href="datasets/README.md"><img src="https://img.shields.io/badge/📊-Datasets-326b69" alt="Datasets"></a>
   <a href="LICENSE"><img src="https://img.shields.io/badge/License-CC%20BY--NC%204.0-lightgrey.svg" alt="License"></a>
 </p>
@@ -167,7 +167,8 @@ This implementation builds on [MoGe-2](https://github.com/microsoft/MoGe), [MINI
   title     = {{MatchCityLoc}: Aerial Localization in {LoD} City Models via Surface Normal Matching},
   author    = {Dhaouadi, Oussema and Bauer, Zuria and Meier, Johannes and Pollefeys, Marc and Cremers, Daniel and Wysocki, Olaf},
   booktitle = {IEEE/CVF Winter Conference on Applications of Computer Vision (WACV)},
-  year      = {2027}
+  year      = {2027},
+  url       = {https://arxiv.org/abs/2610.27110}
 }
 ```
 
